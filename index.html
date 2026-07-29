@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Sarita Blaz ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffe6e6, #ffb3b3);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .sobre {
+            width: 250px;
+            height: 180px;
+            background-color: #ff4d4d;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        .sobre:hover {
+            transform: scale(1.05);
+        }
+        .sobre::after {
+            content: "❤️";
+            font-size: 50px;
+        }
+        .carta {
+            display: none;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 300px;
+            animation: aparecer 0.6s forwards;
+        }
+        h1 { color: #ff4d4d; margin-top: 0; font-size: 22px; }
+        .foto-pareja {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        p { color: #555; line-height: 1.5; font-size: 15px; margin: 10px 0; }
+        .fecha { font-weight: bold; color: #ff4d4d; margin-top: 15px; display: block; font-size: 17px;}
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .corazon-flotante {
+            position: absolute;
+            color: #ff4d4d;
+            font-size: 20px;
+            animation: flotar 3s linear infinite;
+            opacity: 0;
+        }
+        @keyframes flotar {
+            0% { transform: translateY(100vh) translateX(0); opacity: 1; }
+            100% { transform: translateY(-10vh) translateX(100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- REPRODUCTOR DE MÚSICA DE FONDO -->
+    <audio id="musica" loop>
+        <source src="https://soundhelix.com" type="audio/mp3">
+    </audio>
+
+    <div class="container" id="wrapper" onclick="abrirCarta()">
+        <div class="sobre" id="sobre"></div>
+        <div class="carta" id="carta">
+            <h1>¡Para Sarita Blaz! 👑</h1>
+            
+            <!-- ENLACE DE TU IMAGEN ACOPLADO -->
+            <img class="foto-pareja" src="https://postimg.cc" alt="Nosotros">
+            
+            <p>Desde que estás en mi vida, cada momento se ha vuelto más brillante. Gracias por ser mi lugar seguro, mi cómplice y la persona con la que quiero compartir cada sonrisa. Te amo hoy y siempre. ❤️</p>
+            <span class="fecha">Nuestra fecha: 16/07 ✨</span>
+        </div>
+    </div>
+
+    <script>
+        function abrirCarta() {
+            document.getElementById('sobre').style.display = 'none';
+            document.getElementById('carta').style.display = 'block';
+            
+            const musica = document.getElementById('musica');
+            musica.play().catch(error => console.log("La música se activó con éxito."));
+
+            for(let i=0; i<15; i++) {
+                setTimeout(crearCorazon, i * 300);
+            }
+        }
+
+        function crearCorazon() {
+            const corazon = document.createElement('div');
+            corazon.classList.add('corazon-flotante');
+            corazon.innerText = '❤️';
+            corazon.style.left = Math.random() * 100 + 'vw';
+            corazon.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(corazon);
+            setTimeout(() => corazon.remove(), 4000);
+        }
+    </script>
+</body>
+</html>
+
