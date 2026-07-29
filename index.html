@@ -8,118 +8,244 @@
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ffe6e6, #ffb3b3);
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #feada6, #fbb5b1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
             overflow: hidden;
         }
-        .container {
-            text-align: center;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .envelope-wrapper {
             position: relative;
             cursor: pointer;
         }
-        .sobre {
-            width: 250px;
-            height: 180px;
-            background-color: #ff4d4d;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            transition: transform 0.3s;
+        .envelope {
             position: relative;
+            width: 300px;
+            height: 200px;
+            background: #ff4d6d;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-radius: 0 0 10px 10px;
         }
-        .sobre:hover {
-            transform: scale(1.05);
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            z-index: 2;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #ff758f;
+            transform-origin: top;
+            transition: transform 0.4s ease;
         }
-        .sobre::after {
-            content: "❤️";
-            font-size: 50px;
+        .envelope::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 3;
+            border-left: 150px solid #ff4d6d;
+            border-right: 150px solid #ff4d6d;
+            border-bottom: 100px solid #ff5c7a;
+            border-radius: 0 0 10px 10px;
         }
-        .carta {
-            display: none;
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-width: 300px;
-            animation: aparecer 0.6s forwards;
+        .heart-btn {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            font-size: 45px;
+            transition: all 0.3s ease;
         }
-        h1 { color: #ff4d4d; margin-top: 0; font-size: 22px; }
+        .letter {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            width: 270px;
+            height: 180px;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            transition: all 0.6s ease;
+            z-index: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .letter h1 { color: #ff4d6d; font-size: 18px; margin: 0 0 8px 0; }
         .foto-pareja {
             width: 100%;
-            max-height: 200px;
+            max-height: 120px;
             object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-bottom: 8px;
         }
-        p { color: #555; line-height: 1.5; font-size: 15px; margin: 10px 0; }
-        .fecha { font-weight: bold; color: #ff4d4d; margin-top: 15px; display: block; font-size: 17px;}
-        @keyframes aparecer {
-            from { opacity: 0; transform: translateY(50px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        .letter p {
+            color: #4a4a4a;
+            font-size: 12px;
+            line-height: 1.4;
+            margin: 0;
+            text-align: justify;
         }
-        .corazon-flotante {
+        .preg-container {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 2px dashed #ffe6e6;
+            display: none;
+        }
+        .preg-container h2 {
+            font-size: 14px;
+            color: #ff4d6d;
+            margin: 5px 0 10px 0;
+        }
+        .btn-box {
+            display: flex;
+            justify-content: space-around;
+            position: relative;
+            height: 40px;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 6px 20px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+        .btn-si { background: #ff4d6d; color: white; }
+        .btn-no { background: #cccccc; color: #666666; position: absolute; }
+        
+        /* Animaciones */
+        .envelope-wrapper.open .envelope::before { transform: rotateX(180deg); z-index: 0; }
+        .envelope-wrapper.open .letter {
+            transform: translateY(-200px);
+            height: 410px;
+            z-index: 4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .envelope-wrapper.open .heart-btn { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+        .floating-heart {
             position: absolute;
-            color: #ff4d4d;
-            font-size: 20px;
-            animation: flotar 3s linear infinite;
-            opacity: 0;
+            color: #ff758f;
+            pointer-events: none;
+            animation: floatUp 4s linear infinite;
+            z-index: 99;
         }
-        @keyframes flotar {
-            0% { transform: translateY(100vh) translateX(0); opacity: 1; }
-            100% { transform: translateY(-10vh) translateX(100px); opacity: 0; }
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) scale(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- REPRODUCTOR DE MÚSICA DE FONDO -->
-    <audio id="musica" loop>
-        <source src="https://soundhelix.com" type="audio/mp3">
-    </audio>
-
-    <div class="container" id="wrapper" onclick="abrirCarta()">
-        <div class="sobre" id="sobre"></div>
-        <div class="carta" id="carta">
-            <h1>¡Para Sarita Blaz! 👑</h1>
-            
-            <!-- ENLACE DE TU IMAGEN ACOPLADO -->
-            <img class="foto-pareja" src="https://postimg.cc" alt="Nosotros">
-            
-            <p>Desde que estás en mi vida, cada momento se ha vuelto más brillante. Gracias por ser mi lugar seguro, mi cómplice y la persona con la que quiero compartir cada sonrisa. Te amo hoy y siempre. ❤️</p>
-            <span class="fecha">Nuestra fecha: 16/07 ✨</span>
+    <div class="envelope-wrapper" id="box" onclick="abrirTodo(event)">
+        <div class="heart-btn">❤️</div>
+        <div class="envelope">
+            <div class="letter">
+                <h1>¡Para Sarita Blaz! 👑</h1>
+                <img class="foto-pareja" src="https://postimg.cc" alt="Nosotros">
+                <p>Hoy quiero darte las gracias por cada segundo de este tiempo juntos, por tu paciencia infinita y por seguir queriéndome tal y como soy cada día. Eres mi lugar seguro y mi mayor alegría. Me enorgullece tanto decir que somos un equipo invencible, capaz de superar lo que sea tomados de la mano. Mi deseo más grande es seguir siendo el compañero de tu vida, cuidándote, celebrando tus logros y construyendo este futuro hermoso a tu lado. Te amo hoy y siempre. ❤️</p>
+                
+                <div class="preg-container" id="pregunta">
+                    <h2>¿Quieres seguir siendo parte de mi vida? ✨</h2>
+                    <div class="btn-box">
+                        <button class="btn btn-si" onclick="aceptarAmor(event)">¡SÍ! 💖</button>
+                        <button class="btn btn-no" id="btnNo" ontouchstart="moverNo(event)" onmouseover="moverNo(event)" onclick="moverNo(event)">NO</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        function abrirCarta() {
-            document.getElementById('sobre').style.display = 'none';
-            document.getElementById('carta').style.display = 'block';
-            
-            const musica = document.getElementById('musica');
-            musica.play().catch(error => console.log("La música se activó con éxito."));
+        let audioCtx = null;
 
-            for(let i=0; i<15; i++) {
-                setTimeout(crearCorazon, i * 300);
+        function reproducirMelodia() {
+            if (audioCtx) return;
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                let notas = [261.63, 329.63, 392.00, 523.25, 392.00, 329.63]; 
+                let tiempo = audioCtx.currentTime;
+                
+                // Repetir melodía romántica sintetizada en bucle
+                setInterval(() => {
+                    if(audioCtx.state === 'suspended') audioCtx.resume();
+                    let osc = audioCtx.createOscillator();
+                    let gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    let nota = notas[Math.floor(Math.random() * notas.length)];
+                    osc.frequency.setValueAtTime(nota, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.5);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 1.5);
+                }, 800);
+            } catch(e) { console.log(e); }
+        }
+
+        function abrirTodo(e) {
+            const wrapper = document.getElementById('box');
+            if (!wrapper.classList.contains('open')) {
+                wrapper.classList.add('open');
+                reproducirMelodia();
+                
+                setTimeout(() => {
+                    document.getElementById('pregunta').style.display = 'block';
+                }, 600);
+
+                for(let i=0; i<15; i++) {
+                    setTimeout(() => crearCorazon(false), i * 250);
+                }
             }
         }
 
-        function crearCorazon() {
-            const corazon = document.createElement('div');
-            corazon.classList.add('corazon-flotante');
-            corazon.innerText = '❤️';
-            corazon.style.left = Math.random() * 100 + 'vw';
-            corazon.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            document.body.appendChild(corazon);
-            setTimeout(() => corazon.remove(), 4000);
+        function moverNo(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const btnNo = document.getElementById('btnNo');
+            
+            // Mover dentro de un rango aleatorio seguro en la pantalla del celular
+            let x = Math.random() * 160 - 80;
+            let y = Math.random() * 160 - 80;
+            
+            btnNo.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function aceptarAmor(e) {
+            e.stopPropagation();
+            alert("¡Sabía que dirías que sí! Eres el amor de mi vida. 💖");
+            for(let i=0; i<50; i++) {
+                setTimeout(() => crearCorazon(true), i * 80);
+            }
+        }
+
+        function crearCorazon(explosion) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerText = ['❤️','✨','💖','🌸','👑'][Math.floor(Math.random()*5)];
+            heart.style.left = explosion ? (Math.random() * 80 + 10) + 'vw' : Math.random() * 100 + 'vw';
+            heart.style.fontSize = explosion ? (Math.random() * 25 + 20) + 'px' : (Math.random() * 15 + 15) + 'px';
+            heart.style.animationDuration = explosion ? (Math.random() * 1.5 + 1.5) + 's' : (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
         }
     </script>
 </body>
 </html>
-
