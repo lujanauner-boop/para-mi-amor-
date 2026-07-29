@@ -158,7 +158,10 @@
         <div class="envelope">
             <div class="letter">
                 <h1>¡Para Sarita Blaz! 👑</h1>
-                <img class="foto-pareja" src="https://postimg.cc" alt="Nosotros">
+                
+                <!-- ESTA LÍNEA CARGA TU FOTO DIRECTAMENTE DESDE TU REPOSITORIO -->
+                <img class="foto-pareja" src="Snapchat-244319576.jpg" alt="Nosotros">
+                
                 <p>Hoy quiero darte las gracias por cada segundo de este tiempo juntos, por tu paciencia infinita y por seguir queriéndome tal y como soy cada día. Eres mi lugar seguro y mi mayor alegría. Me enorgullece tanto decir que somos un equipo invencible, capaz de superar lo que sea tomados de la mano. Mi deseo más grande es seguir siendo el compañero de tu vida, cuidándote, celebrando tus logros y construyendo este futuro hermoso a tu lado. Te amo hoy y siempre. ❤️</p>
                 
                 <div class="preg-container" id="pregunta">
@@ -180,9 +183,7 @@
             try {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 let notas = [261.63, 329.63, 392.00, 523.25, 392.00, 329.63]; 
-                let tiempo = audioCtx.currentTime;
                 
-                // Repetir melodía romántica sintetizada en bucle
                 setInterval(() => {
                     if(audioCtx.state === 'suspended') audioCtx.resume();
                     let osc = audioCtx.createOscillator();
@@ -221,7 +222,6 @@
             e.stopPropagation();
             const btnNo = document.getElementById('btnNo');
             
-            // Mover dentro de un rango aleatorio seguro en la pantalla del celular
             let x = Math.random() * 160 - 80;
             let y = Math.random() * 160 - 80;
             
@@ -230,7 +230,7 @@
 
         function aceptarAmor(e) {
             e.stopPropagation();
-            alert("¡Sabía que dirías que sí! Eres el amor de mi vida. 💖");
+            alert("¡Sabía que dirías que sí! Eres el amor de mi vida. 💖");
             for(let i=0; i<50; i++) {
                 setTimeout(() => crearCorazon(true), i * 80);
             }
